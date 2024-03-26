@@ -7,25 +7,22 @@ use App\Models\Expense;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @OA\Info(
+ *      title="Budget Buddy API",
+ *      version="1.0.0",
+ *      description="API documentation for Budget Buddy",
+ *      @OA\Contact(
+ *          email="anasaliky3@gmail.com"
+ *      ),
+ *      @OA\License(
+ *          name="MIT License",
+ *          url="https://opensource.org/licenses/MIT"
+ *      )
+ * )
+ */
 class ExpenseController extends Controller
 {
-
-    /**
-     * @OA\Info(
-     *      title="Budget Buddy API",
-     *      version="1.0.0",
-     *      description="API documentation for Budget Buddy",
-     *      @OA\Contact(
-     *          email="anasaliky3@gmail.com"
-     *      ),
-     *      @OA\License(
-     *          name="MIT License",
-     *          url="https://opensource.org/licenses/MIT"
-     *      )
-     * )
-     */
-
-
     /**
      * @OA\Get(
      *     path="/api/expensesIndex",
@@ -36,7 +33,15 @@ class ExpenseController extends Controller
      *         description="List of all expenses",
      *         @OA\JsonContent(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Expense")
+     *             @OA\Items(
+     *                 type="object",
+     *                 @OA\Property(property="id", type="integer"),
+     *                  @OA\Property(property="price", type="number"),
+     *                  @OA\Property(property="description", type="string"),
+     *                  @OA\Property(property="date", type="string", format="date"),
+     *                  @OA\Property(property="created_at", type="string"),
+     *                  @OA\Property(property="updated_at", type="string")
+     *             )
      *         )
      *     ),
      *     security={
@@ -67,12 +72,25 @@ class ExpenseController extends Controller
      *     tags={"Expenses"},
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/ExpenseRequest")
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="price", type="number"),
+     *             @OA\Property(property="description", type="string"),
+     *             @OA\Property(property="date", type="string", format="date"),
+     *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Expense created successfully",
-     *         @OA\JsonContent(ref="#/components/schemas/Expense")
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="id", type="integer"),
+     *             @OA\Property(property="price", type="number"),
+     *             @OA\Property(property="description", type="string"),
+     *             @OA\Property(property="date", type="string", format="date"),
+     *             @OA\Property(property="created_at", type="string"),
+     *             @OA\Property(property="updated_at", type="string")
+     *         )
      *     ),
      *     security={
      *         {"bearerAuth": {}}
@@ -111,7 +129,15 @@ class ExpenseController extends Controller
      *     @OA\Response(
      *         response=200,
      *         description="Expense retrieved successfully",
-     *         @OA\JsonContent(ref="#/components/schemas/Expense")
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="id", type="integer"),
+     *             @OA\Property(property="price", type="number"),
+     *             @OA\Property(property="description", type="string"),
+     *             @OA\Property(property="date", type="string", format="date"),
+     *             @OA\Property(property="created_at", type="string"),
+     *             @OA\Property(property="updated_at", type="string")
+     *         )
      *     ),
      *     @OA\Response(
      *         response=404,
@@ -149,12 +175,27 @@ class ExpenseController extends Controller
      *     ),
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/ExpenseRequest")
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="price", type="number"),
+     *             @OA\Property(property="description", type="string"),
+     *             @OA\Property(property="date", type="string", format="date"),
+     *             @OA\Property(property="created_at", type="string"),
+     *             @OA\Property(property="updated_at", type="string")
+     *         )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Expense updated successfully",
-     *         @OA\JsonContent(ref="#/components/schemas/Expense")
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="id", type="integer"),
+     *             @OA\Property(property="price", type="number"),
+     *             @OA\Property(property="description", type="string"),
+     *             @OA\Property(property="date", type="string", format="date"),
+     *             @OA\Property(property="created_at", type="string"),
+     *             @OA\Property(property="updated_at", type="string")
+     *         )
      *     ),
      *     @OA\Response(
      *         response=404,
